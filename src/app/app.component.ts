@@ -20,16 +20,18 @@ export class AppComponent {
   selectedIndexes: number[] = [];
   challenges: Challenge[] = [
     {
-      id: 1,
-      daysOfChallenge: 30,
+      id: 0,
+      daysOfChallenge: 5,
       title: 'Go and Rust Learning',
       description: 'Deep dive into the web devlopement journey !',
+      selectedDays: [], // Separate list of selected days for each challenge
     },
     {
-      id: 2,
+      id: 1,
       daysOfChallenge: 20,
-      title: 'Go and Rust Learning',
+      title: 'HtmX and yNuxt Learning',
       description: 'Deep dive into the web devlopement journey !',
+      selectedDays: [], // Separate list of selected days for each challenge
     },
   ];
   toggleDisplayDiv() {
@@ -46,27 +48,43 @@ export class AppComponent {
       title: this.title,
       description: this.description,
       daysOfChallenge: this.daysOfChallenge,
+      selectedDays: [],
     };
     this.challenges.push(challenge);
   }
 
-  toggleColor(index: number) {
-    const currentIndex = this.selectedIndexes.indexOf(index);
+  toggleColor(challengeId: number, index: number) {
+    const currentIndex =
+      this.challenges[challengeId].selectedDays.indexOf(index);
 
     // If the clicked index is the next expected index
-    if (currentIndex === -1 && index === this.selectedIndexes.length) {
+    if (
+      currentIndex === -1 &&
+      index === this.challenges[challengeId].selectedDays.length
+    ) {
       // Add it to the selectedIndexes
-      this.selectedIndexes.push(index);
+      this.challenges[challengeId].selectedDays.push(index);
     }
     // If the clicked index is already selected and is the last one
-    else if (currentIndex === this.selectedIndexes.length - 1) {
+    else if (
+      currentIndex ===
+      this.challenges[challengeId].selectedDays.length - 1
+    ) {
       // Remove it from the selectedIndexes
-      this.selectedIndexes.pop();
+      this.challenges[challengeId].selectedDays.pop();
     }
-    console.log(this.selectedIndexes);
+    console.log(this.challenges[challengeId].selectedDays);
+    this.isChallengeCompleted(challengeId);
   }
 
-  isSelected(index: number): boolean {
-    return this.selectedIndexes.includes(index);
+  isSelected(challengeId: number, index: number): boolean {
+    return this.challenges[challengeId].selectedDays.includes(index);
+  }
+  isChallengeCompleted(challengeId: number) {
+    let selectedDays = this.challenges[challengeId].selectedDays.length;
+    let daysOfChallenge = this.challenges[challengeId].daysOfChallenge;
+
+    if (selectedDays === daysOfChallenge) {
+    }
   }
 }
