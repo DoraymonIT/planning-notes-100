@@ -1,13 +1,24 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 import { Challenge } from './challange.model';
 import { FormsModule } from '@angular/forms';
+import { ProductComponent } from './products/product/product.component';
+import { CompanyComponent } from './companies/company/company.component';
+import { CrationDocsProcessComponent } from './cration-docs-process/cration-docs-process.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, FormsModule],
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    FormsModule,
+    ProductComponent,
+    CompanyComponent,
+    CrationDocsProcessComponent,
+    RouterModule
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
